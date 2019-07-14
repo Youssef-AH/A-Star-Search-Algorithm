@@ -11,6 +11,9 @@ public class Node {
     // finalCost = heuristicCost + gCosts
     private double finalCost, heuristicCost, gCost;
 
+    // true if node is part of solution path
+    private boolean solution;
+
     public Node(int x, int y) {
         this.x = x;
         this.y = y;
@@ -62,5 +65,13 @@ public class Node {
 
     public void setgCost(double gCost) {
         this.gCost = gCost;
+    }
+
+    public boolean isSolution() {
+        return solution;
+    }
+
+    public void setSolution(boolean solution) {
+        this.solution = solution;
     }
 }
