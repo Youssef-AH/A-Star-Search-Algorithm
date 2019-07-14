@@ -6,7 +6,6 @@ public class AStarSearch {
     private static final double V_H_MOVE_COST = 1.0;
     private static final double DIAGONAL_MOVE_COST = 1.414;
 
-    private int tar;
     private Node startNode;
     private Node targetNode;
 
@@ -14,7 +13,7 @@ public class AStarSearch {
     private boolean[][] closedNodes; // nodes already examined
     private Node[][] grid;
 
-    private AStarSearch(Node startNode, Node targetNode, int width, int height, int[][] obstacles) {
+    public AStarSearch(Node startNode, Node targetNode, int width, int height, int[][] obstacles) {
 
         this.grid = new Node[width][height];
         this.startNode = startNode;
@@ -38,10 +37,10 @@ public class AStarSearch {
             }
         }
 
-        grid[startNode.getX()][startNode.getY()].setFinalCost(0.0);
+        grid[startNode.getX()][startNode.getY()].setgCost(0.0);
     }
 
-    private void findPath() {
+    public void findPath() {
         openNodes.add(startNode); // add start node to open list
 
         Node current;
@@ -60,7 +59,7 @@ public class AStarSearch {
                     processNode(current.getX() - 1, current.getY() - 1, current, DIAGONAL_MOVE_COST);
                 }
                 if (current.getY() + 1 < grid[0].length) {
-                    processNode(current.getX() - 1, current.getY() + 1, current, +DIAGONAL_MOVE_COST);
+                    processNode(current.getX() - 1, current.getY() + 1, current, DIAGONAL_MOVE_COST);
                 }
             }
 
@@ -110,7 +109,7 @@ public class AStarSearch {
         }
     }
 
-    private void tracePath() {
+    public void tracePath() {
         if (closedNodes[targetNode.getX()][targetNode.getY()]) {
             System.out.println("=================PATH=================");
             Node current = grid[targetNode.getX()][targetNode.getY()];
@@ -147,15 +146,15 @@ public class AStarSearch {
         return ((x == targetNode.getX()) && (y == targetNode.getY()));
     }
 
-    private boolean isValid(int x, int y) {
-        return grid[x][y] != null;
-    }
-
-    public static void main(String[] args) {
-        AStarSearch aStarSearch = new AStarSearch(new Node(4, 2), new Node(17, 19),
-                20, 20, new int[][]{{0, 2}, {0, 4}, {1, 3}});
-
-        aStarSearch.findPath();
-        aStarSearch.tracePath();
-    }
+//    public static void main(String[] args) {
+//        AStarSearch aStarSearch = new AStarSearch(new Node(4, 2), new Node(17, 19),
+//                20, 20, new int[][]{{0, 2}, {0, 4}, {1, 3}});
+//
+//        long startTime = System.currentTimeMillis();
+//        aStarSearch.findPath();
+//        long endTime = System.currentTimeMillis();
+//        aStarSearch.tracePath();
+//        long runtime = endTime - startTime;
+//        System.out.println("Completed in " + runtime + "ms");
+//    }
 }
